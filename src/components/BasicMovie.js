@@ -27,10 +27,9 @@ const BasicMovie = ({aboutMovie}) => {
    
 
     function lookMoreInfo() {
-        console.log("aqui = ",aboutMovie.imdbID)
+        //console.log("aqui = ",aboutMovie.imdbID)
         setIdMovie(aboutMovie.imdbID)
         setActive(!active)
-        
     }
 
     return (
@@ -40,22 +39,22 @@ const BasicMovie = ({aboutMovie}) => {
             <img src={aboutMovie.Poster} alt={aboutMovie.Title}/>
             {/*<img hidden={!active} id="info" src={aboutMovie.Poster} alt={aboutMovie.Title} />*/}
 
-            <h4>{(movies && movies.Actors)}</h4>
-            <h4>{(movies && movies.Awards)}</h4>
-            <h4>{(movies && movies.BoxOffice)}</h4>
-            <h4>{(movies && movies.Country)}</h4>
-            <h4>{(movies && movies.Director)}</h4>
-            <h4>{(movies && movies.Gnere)}</h4>
-            <h4>{(movies && movies.Language)}</h4>
-            <h4>{(movies && movies.Metascore)}</h4>
-            <h4>{(movies && movies.Plot)}</h4>
-            <h4>{(movies && movies.Rated)}</h4>
-            <h4>{(movies && movies.Released)}</h4>
-            <h4>{(movies && movies.Runtime)}</h4>
-            <h4>{(movies && movies.imdbRating)}</h4>
-            <h4>{(movies && movies.imdbVotes)}</h4>
+            <h4>{(active && movies && movies.Actors)}</h4>
+            <h4>{(active && movies && movies.Awards)}</h4>
+            <h4>{(active && movies && movies.BoxOffice)}</h4>
+            <h4>{(active && movies && movies.Country)}</h4>
+            <h4>{(active && movies && movies.Director)}</h4>
+            <h4>{(active && movies && movies.Gnere)}</h4>
+            <h4>{(active && movies && movies.Language)}</h4>
+            <h4>{(active && movies && movies.Metascore)}</h4>
+            <h4>{(active && movies && movies.Plot)}</h4>
+            <h4>{(active && movies && movies.Rated)}</h4>
+            <h4>{(active && movies && movies.Released)}</h4>
+            <h4>{(active && movies && movies.Runtime)}</h4>
+            <h4>{(active && movies && movies.imdbRating)}</h4>
+            <h4>{(active && movies && movies.imdbVotes)}</h4>
 
-            {(movies && movies.Ratings.map((item, index) => {
+            {(active && movies && movies.Ratings.map((item, index) => {
                 return(
                     <ul key={index}>
                         <li>{item.Source}</li>    

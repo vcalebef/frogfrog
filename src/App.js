@@ -10,13 +10,17 @@ function getRandomNumber(min, max) {
   return Math.floor(Math.random() * (max - min) + min);
 }
 
+function removeSpace(nameMovie) {
+  return nameMovie.replace(" ","%20");
+}
+
 function App() {
   const [movies, setMovies] = useState();
   const [search, setSearch] = useState('');
 
   //teste                      
-  //console.log("renderizou")
-  //console.log(movies && movies)
+  console.log("renderizou")
+  console.log(movies && movies)
   //--------
  
   useEffect(() => {    
@@ -41,14 +45,18 @@ function App() {
   let url = 'https://movie-database-alternative.p.rapidapi.com/?s='+searchMovie+'&r=json&page=1'
 
   if(search.length > 1){
-    url = 'https://movie-database-alternative.p.rapidapi.com/?s='+search+'&r=json&page=1';
+    let configuredSearch = removeSpace(search)
+    url = 'https://movie-database-alternative.p.rapidapi.com/?s='+configuredSearch+'&r=json&page=1';
   }
+
+  console.log(url)
+
     fetch(url, options)
       .then(response => response.json())
       .then(data => setMovies(data))
       .catch(err => console.error(err));
 
-    //console.log(movies)
+
   }, [search])
 
   return (
