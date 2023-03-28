@@ -8,14 +8,11 @@ const BasicMovie = ({aboutMovie}) => {
     const [movies, setMovies] = useState();
     const [active, setActive] = useState(false);
     const [idMovie, setIdMovie] = useState();
-    //console.log("antes ",active)
 
     useEffect(() => {
         
         if(active){
-           //console.log("entrou")
             let url = 'https://movie-database-alternative.p.rapidapi.com/?r=json&i='+idMovie;
-            //console.log(url)
         fetch(url, options)
             .then(response => response.json())
             .then(data => setMovies(data))
@@ -27,7 +24,6 @@ const BasicMovie = ({aboutMovie}) => {
    
 
     function lookMoreInfo() {
-        //console.log("aqui = ",aboutMovie.imdbID)
         setIdMovie(aboutMovie.imdbID)
         setActive(!active)
     }
@@ -37,7 +33,6 @@ const BasicMovie = ({aboutMovie}) => {
             <h1>{aboutMovie.Title} - {aboutMovie.Year}</h1>
             <h2>{aboutMovie.Type}</h2>
             <img src={aboutMovie.Poster} alt={aboutMovie.Title}/>
-            {/*<img hidden={!active} id="info" src={aboutMovie.Poster} alt={aboutMovie.Title} />*/}
 
             <h4>{(active && movies && movies.Actors)}</h4>
             <h4>{(active && movies && movies.Awards)}</h4>

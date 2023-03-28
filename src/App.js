@@ -5,6 +5,7 @@ import BasicMovie from './components/BasicMovie.js';
 import * as optionsMovie from './config/optionsMovie.js';
 
 const options = optionsMovie.options;
+let url = '';
 
 function getRandomNumber(min, max) {
   return Math.floor(Math.random() * (max - min) + min);
@@ -15,16 +16,12 @@ function removeSpace(nameMovie) {
 }
 
 function App() {
+  const [error, setError] = useState({
+    result: false,
+    type: ''
+  });
   const [movies, setMovies] = useState();
   const [search, setSearch] = useState('');
-
-  //teste                      
-  console.log("renderizou")
-  console.log(movies && movies)
-  //--------
- 
-  useEffect(() => {    
-
   let listRandomMovies = 
   ['Justice',
     'Avengers', 
@@ -40,24 +37,41 @@ function App() {
     'speed',
     'The%20last'];
 
-  let searchMovie = listRandomMovies[getRandomNumber(0,13)]
 
-  let url = 'https://movie-database-alternative.p.rapidapi.com/?s='+searchMovie+'&r=json&page=1'
+  //teste                      
+  //console.log("renderizou")
+  console.log(movies && movies)
+  //--------
 
-  if(search.length > 1){
-    let configuredSearch = removeSpace(search)
-    url = 'https://movie-database-alternative.p.rapidapi.com/?s='+configuredSearch+'&r=json&page=1';
+  function checkError(movies){
+    if (error.result === false && movies && movies.Response === 'False') {
+      setError(error.result = true, error.type = movies.Error);
+      console.log(error)
+    }
   }
 
-  console.log(url)
+  function craftUrl(){
+    let searchMovie = listRandomMovies[getRandomNumber(0,13)]
+    let url = 'https://movie-database-alternative.p.rapidapi.com/?s='+searchMovie+'&r=json&page=1'
 
+    if(search.length > 1){
+      let configuredSearch = removeSpace(search)
+      url = 'https://movie-database-alternative.p.rapidapi.com/?s='+configuredSearch+'&r=json&page=1';
+    }
+
+    return url;
+  }
+
+  url = craftUrl()
+ 
+  useEffect(() => {    
     fetch(url, options)
       .then(response => response.json())
       .then(data => setMovies(data))
       .catch(err => console.error(err));
-
-
   }, [search])
+
+ checkError(movies);
 
   return (
     <div className="App">
@@ -71,19 +85,23 @@ function App() {
         value={search}
       />
       
-      {movies && movies.Response === 'True' && movies.Search.Poster !== 'N/A' && movies.Search.map(item => {
-        if (item.Poster !== 'N/A'){
-          return (
-            <ul key={item.imdbID}>
-              <BasicMovie aboutMovie={item}/>
-            </ul>
-          )
-        }else{
-          return(
-            null
-          )
-        }
-      })}
+      {    
+        (movies && movies.Response === 'True' && movies.Search.Poster !== 'N/A' && movies.Search.map(item => {
+          if (item.Poster !== 'N/A'){
+            return (
+              <li key={item.imdbID}>
+                <BasicMovie aboutMovie={item}/>
+              </li>      
+            )
+          }else{
+            return(
+              null
+            )
+          }
+        }))
+      }
+
+      <h1>{(movies && movies.Response)}</h1>
     </div>
   );
 }
