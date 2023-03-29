@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react"
 import * as optionsMovie from '../config/optionsMovie.js';
+import * as configUrl from '../config/configUrl.js';
 
 const options = optionsMovie.options;
+const skeleton = configUrl.urlMoreInfo.skeleton;
 
 const BasicMovie = ({aboutMovie}) => {
 
@@ -12,7 +14,7 @@ const BasicMovie = ({aboutMovie}) => {
     useEffect(() => {
         
         if(active){
-            let url = 'https://movie-database-alternative.p.rapidapi.com/?r=json&i='+idMovie;
+            let url = skeleton+idMovie;
         fetch(url, options)
             .then(response => response.json())
             .then(data => setMovies(data))
@@ -20,8 +22,6 @@ const BasicMovie = ({aboutMovie}) => {
         }             
 
     }, [active,idMovie])
-
-   
 
     function lookMoreInfo() {
         setIdMovie(aboutMovie.imdbID)
