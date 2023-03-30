@@ -80,7 +80,7 @@ const InitialContent = () => {
     }
 
     return (
-        <div className="App">
+        <div className="App">           
             <h2>🐸FrogFrog🐸</h2>
             <input 
                 name="search" 
