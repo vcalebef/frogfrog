@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react"
+import '../style/InitialContent.scss';
+import { useEffect, useState } from "react";
 import * as optionsMovie from '../config/optionsMovie.js';
 import * as configUrl from '../config/configUrl.js';
 import BasicMovie from "./BasicMovie.js";
@@ -64,8 +65,8 @@ const InitialContent = () => {
 
     if (movies && movies.Response === 'False') {
         return (
-            <div className="App">
-                <h2>🐸FrogFrog🐒</h2>
+            <div className="Header">
+                <h1>🐸FrogFrog🐒</h1>
                 <input 
                     name="search" 
                     type="text" 
@@ -73,39 +74,42 @@ const InitialContent = () => {
                     onChange={e => setSearch(e.target.value)}
                     value={search}
                 />
-                <br/>
                 <img src={require("../images/404.png")} alt="" />
             </div>
         )
     }
 
     return (
-        <div className="App">           
-            <h2>🐸FrogFrog🐸</h2>
-            <input 
-                name="search" 
-                type="text" 
-                placeholder="Search by full name" 
-                onChange={e => setSearch(e.target.value)}
-                value={search}
-            />
-
-            {    
-                (movies && movies.Response === 'True' && movies.Search.Poster !== 'N/A' && movies.Search.map(item => {
-                    //if (item.Poster !== 'N/A'){
-                    return (
-                        <li key={item.imdbID}>
-                        <BasicMovie aboutMovie={item}/>
-                        </li>      
-                    )
-                    // }else{
-                    // return(
-                    //     null
-                    // )
-                    // }
-                }))
-            }       
-    </div>
+        <div>
+            <div className="Header">           
+                <h2>🐸FrogFrog🐸</h2>
+                <input 
+                    name="search" 
+                    type="text" 
+                    placeholder="Search by full name" 
+                    onChange={e => setSearch(e.target.value)}
+                    value={search}
+                />
+            </div>
+            <div>
+                {    
+                    (movies && movies.Response === 'True' && movies.Search.Poster !== 'N/A' && movies.Search.map(item => {
+                        //if (item.Poster !== 'N/A'){
+                        return (
+                            <li key={item.imdbID}>
+                            <BasicMovie aboutMovie={item}/>
+                            </li>      
+                        )
+                        // }else{
+                        // return(
+                        //     null
+                        // )
+                        // }
+                    }))
+                }       
+            </div>
+        </div>
+        
     )
 }
 
