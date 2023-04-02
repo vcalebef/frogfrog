@@ -9,6 +9,7 @@
     border-radius: 15px;
     backdrop-filter: blur(6px);
     opacity: 0.9;
+    box-shadow: 2px 2px 2px 1px rgba(0, 0, 0, 0.2);
 
     display: flex;
     flex-direction: column;
@@ -20,7 +21,7 @@
     }
 
     input {
-        width: 400px;
+        width: 45%;
         height: 28px;
 
         border: none;
@@ -31,3 +32,4 @@
         color: var(--gray-900);
     }
 }
+
