@@ -85,11 +85,11 @@ const InitialContent = () => {
         return (
             <div>
                 <div className="Header">
-                    <h2>🐸FrogFrog🐔</h2>
+                    <h2>🐔FrogFrog🐔</h2>
                     <input 
                         name="search" 
                         type="text" 
-                        placeholder="Please search by full name" 
+                        placeholder="🔍 Please search by full name" 
                         onChange={e => setSearch(e.target.value)}
                         value={search}
                         autoFocus
@@ -108,7 +108,7 @@ const InitialContent = () => {
                 <input 
                     name="search" 
                     type="text" 
-                    placeholder="Please search by full name" 
+                    placeholder="🔍 Please search by full name"
                     
                     onChange={e => setSearch(e.target.value)}
                     value={search}
